@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #a300d9;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .hero {
+            background-color: #9fec25;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .btn {
+            background-color: #fff;
+            color: #0074d9;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #eee;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .card {
+            background-color: #0cd4f3;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .card img {
+            max-width: 100%;
+            height: auto;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #050505;
+            color: #f4f1f1; 
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+            color: black;
+        }
+        .dropdown button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+    </style>
+    <title>Lego Collection</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Lego Collection</a>
+        <a href="/about">About</a>
+        <div class="dropdown">
+            <button>Theme &#9660;</button>
+            <div class="dropdown-content">
+                <a href="/lego/sets?theme=My%20Town">My Town</a>
+                <a href="/lego/sets?theme=Disney's%20Mickey%20Mouse">Disney's Mickey Mouse</a>
+                <a href="/lego/sets?theme=Miles%20From%20Tomorrowland">Miles From Tomorrowland</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="hero">
+            <h1>Welcome to the Lego Collection</h1>
+            <p>Explore our amazing Lego sets and discover your favorite themes.</p>
+            <a href="/lego/sets" class="btn">Explore Now</a>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <img src="https://cdn.rebrickable.com/media/sets/10832-1.jpg" alt="My Town Set Image">
+                <h2>My Town Set</h2>
+                <p>Discover the My Town Lego theme.</p>
+                <a href="/lego/sets/10832-1" class="btn">Learn More</a>
+            </div>
+            <div class="card">
+                <img src="https://cdn.rebrickable.com/media/sets/10827-1.jpg" alt="Disney's Mickey Mouse Set Image">
+                <h2>Disney's Mickey Mouse Set</h2>
+                <p>Explore the magical world of Mickey Mouse.</p>
+                <a href="/lego/sets/10827-1" class="btn">Learn More</a>
+            </div>
+            <div class="card">
+                <img src="https://cdn.rebrickable.com/media/sets/10826-1.jpg" alt="Miles From Tomorrowland Set Image">
+                <h2>Miles From Tomorrowland Set</h2>
+                <p>Embark on an outer space adventure with Miles.</p>
+                <a href="/lego/sets/10826-1" class="btn">Learn More</a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
