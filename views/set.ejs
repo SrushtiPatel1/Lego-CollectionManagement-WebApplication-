@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            background-image: url('https://i.pinimg.com/originals/08/96/51/0896511df173f914d1ee6bd45bcfac82.jpg');
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #a300d9;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: whitesmoke;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero {
+            background-color: #9fec25;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 20px;
+        }
+
+        .btn {
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 20px;
+            display: inline-block;
+            font-size: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .set-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .set-info img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .set-info h2 {
+            font-size: 28px;
+            margin: 10px 0;
+        }
+
+        .set-info p {
+            font-size: 18px;
+        }
+
+        .quote {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ffc107;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .quote blockquote {
+            font-size: 24px;
+        }
+
+        .quote p {
+            font-size: 20px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #050505;
+            color: #f4f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .filter-links a.active {
+            background-color: #0074d9;
+            color: #fff;
+        }
+
+        .filter-links a {
+            background-color: #fff;
+            color: #0074d9;
+            border: 1px solid #0074d9;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .filter-links a:hover {
+            background-color: #0074d9;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0074d9;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <title>Lego Collection</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Lego Collection</a>
+        <a href="/about">About</a>
+        <div class="dropdown">
+            
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="hero">
+            <h1><%= set.name %></h1>
+            <p>Below, you will find detailed information about the set:</p>
+        </div>
+        <div class="set-info">
+            <img src="<%= set.img_url %>" alt="<%= set.name %>" width="200">
+            <h2><%= set.name %></h2>
+            <p>Year: <%= set.year %></p>
+            <p>Theme: <%= set.theme %></p>
+            <p>Number of Parts: <%= set.num_parts %></p>
+        </div>
+        <div class="quote" id="quote">
+        </div>
+        <a href="#" onclick="history.back(); return false;" class="btn">Back</a>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('https://quotable.io/random')
+                .then(response => response.json())
+                .then(data => {
+                    const quoteElement = document.getElementById('quote');
+                    quoteElement.innerHTML = `<blockquote>${data.content}</blockquote><p>- ${data.author}</p>`;
+                })
+                .catch(error => console.error(error));
+        });
+    </script>
+</body>
+</html>

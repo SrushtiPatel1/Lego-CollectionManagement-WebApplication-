@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            background-image: url('https://i.pinimg.com/originals/08/96/51/0896511df173f914d1ee6bd45bcfac82.jpg');
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #a300d9;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .collection {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .hero {
+            background-color: #9fec25;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .card {
+            background-color: #0cd4f3;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #050505;
+            color: #f4f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .filter-links a.active {
+            background-color: #0074d9;
+            color: #fff;
+        }
+
+        .filter-links a {
+            background-color: #fff;
+            color: #0074d9;
+            border: 1px solid #0074d9;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+            text-decoration: none;
+        }
+
+        .filter-links a:hover {
+            background-color: #0074d9;
+            color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0074d9;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <title>Lego Collection</title>
+</head>
+<body>
+    
+    <div class="navbar">
+        <a href="/">Lego Collection</a>
+        <a href="/about">About</a>
+        <div class="dropdown">
+            
+            </div>
+        </div>
+    </div>
+        
+        <div class="container">
+            <div class="hero">
+                <h1>Collection</h1>
+                <div class="filter-links">
+                    <a href="/lego/sets?theme=Town" class="btn">Town</a>
+                    <a href="/lego/sets?theme=4.5V" class="btn">4.5V</a>
+                    <a href="/lego/sets?theme=Trains" class="btn">Trains</a>
+                    <a href="/lego/sets?theme=Duplo" class="btn">Duplo</a>
+                    <a href="/lego/sets?theme=Basic Set" class="btn">Basic Set</a>
+                    <a href="/lego/sets?theme=Sofia the First" class="btn">Sofia the First</a>
+                    <a href="/lego/sets?theme=DC Comics" class="btn">DC Comics</a>
+                    <a href="/lego/sets?theme=Miles From Tomorrowland" class="btn">Miles From Tomorrowland</a>
+                    <a href="/lego/sets?theme=Disney's Mickey Mouse" class="btn">Disney's Mickey Mouse</a>
+                    <a href="/lego/sets?theme=Doc McStuffins" class="btn">Doc McStuffins</a>
+                    <a href="/lego/sets?theme=Universal Building Set" class="btn">Universal Building Set</a>
+                    <a href="/lego/sets?theme=My Town" class="btn">My Town</a>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Theme</th>
+                    <th>Year</th>
+                    <th>Number of Parts</th>
+                    <th>Details</th>
+                </tr>
+                <% sets.forEach(function(set) { %>
+                    <tr>
+                        <td><img src="<%= set.img_url %>" alt="<%= set.name %>" width="50"></td>
+                        <td><%= set.name %></td>
+                        <td><a href="/lego/sets?theme=<%= set.theme %>" class="btn"><%= set.theme %></a></td>
+                        <td><%= set.year %></td>
+                        <td><%= set.num_parts %></td>
+                        <td><a href="/lego/sets/<%= set.set_num %>" class="btn">Details</a></td>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
+    </body>
+    </html>

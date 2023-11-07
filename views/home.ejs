@@ -8,6 +8,7 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
+            background-image: url('https://i.pinimg.com/originals/08/96/51/0896511df173f914d1ee6bd45bcfac82.jpg');
             padding: 0;
         }
         .navbar {
@@ -30,7 +31,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #ECECEC90;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -93,16 +94,16 @@
     <title>Lego Collection</title>
 </head>
 <body>
-    <div class="navbar">
-        <a href="/">Lego Collection</a>
-        <a href="/about">About</a>
-        <div class="dropdown">
-            <button>Theme &#9660;</button>
-            <div class="dropdown-content">
-                <a href="/lego/sets?theme=My%20Town">My Town</a>
-                <a href="/lego/sets?theme=Disney's%20Mickey%20Mouse">Disney's Mickey Mouse</a>
-                <a href="/lego/sets?theme=Miles%20From%20Tomorrowland">Miles From Tomorrowland</a>
-            </div>
+    <div class="navbar bg-base-100">
+        <a href="/" class="<%= (page === '/') ? 'active' : '' %>">Lego Collection</a>
+        <ul>
+            <li><a class="<%= (page === '/lego/sets') ? 'active' : '' %>" href="/lego/sets">View Collection</a></li>
+        </ul>
+        <a href="/about" class="<%= (page === '/about') ? 'active' : '' %>">About</a>
+    </div>
+    
+    
+    
         </div>
     </div>
     <div class="container">
