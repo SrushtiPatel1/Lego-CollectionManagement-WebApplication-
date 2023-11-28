@@ -36,7 +36,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
         .hero {
-            background-color: #9fec25;
+            background-color: #f44336; /* Update the color for 500 error */
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -52,67 +52,25 @@
         .btn:hover {
             background-color: #eee;
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .card {
-            background-color: #0cd4f3;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-        }
-        .card img {
-            max-width: 100%;
-            height: auto;
-        }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #050505;
-            color: #f4f1f1; 
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-            color: black;
-        }
-        .dropdown button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            outline: none;
-        }
     </style>
-    <title>About Me</title>
+    <title>Lego Collection - 500 Error</title>
 </head>
 <body>
     <div class="navbar bg-base-100">
         <a href="/" class="<%= (page === '/') ? 'active' : '' %>">Lego Collection</a>
         <ul>
+            
             <li><a class="<%= (page === '/lego/sets') ? 'active' : '' %>" href="/lego/sets">View Collection</a></li>
             <li><a class="<%= (page === '/lego/addSet') ? 'active' : '' %>" href="/lego/addSet">Add to Collection</a></li>
         </ul>
+
+        
         <a href="/about" class="<%= (page === '/about') ? 'active' : '' %>">About</a>
     </div>
     <div class="container">
         <div class="hero">
-            <h1>About Me</h1>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <img src="https://www.unigreet.com/wp-content/uploads/2021/03/Srushti-WhatsApp-dp-1024x1024.jpg" alt="Srushti Patel">
-            </div>
-            <div class="card">
-                <p>I am Srushti Patel. I love to play Garba (Indian Gujarati Folk Dance). I am enrolled in the Computer Programming Course in Seneca College studying in 3 Semester with my subjects as WEB322, OOP345, SYD211, NAT161, DBS311.</p>
-            </div>
+            <h1>500 - Internal Server Error</h1>
+            <p>Oops! Something went wrong on our end. Please try again later.</p>
         </div>
     </div>
 </body>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Set</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.pinimg.com/originals/08/96/51/0896511df173f914d1ee6bd45bcfac82.jpg');
+            background-repeat: repeat;
+        }
+
+        .navbar {
+            background-color: #a300d9;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #11bae4;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero {
+            background-color: #9fec25;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: grid;
+            gap: 10px;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 5px;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            grid-column: 1 / span 2;
+        }
+
+        input,
+        select,
+        button {
+            width: calc(100% - 10px);
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 5px;
+            grid-column: span 2;
+        }
+
+        button {
+            background-color: #fff;
+            color: #0074d9;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Lego Collection</a>
+        <a href="/about">About</a>
+    </div>
+    <div class="container">
+        <div class="hero">
+            <h1>Add Your Imagination</h1>
+            
+        </div>
+        <form action="/lego/addSet" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="number" id="year" name="year" required>
+            </div>
+
+            <div class="form-group">
+                <label for="num_parts">Number of Parts:</label>
+                <input type="number" id="num_parts" name="num_parts" required>
+            </div>
+
+            <div class="form-group">
+                <label for="img_url">Image URL:</label>
+                <input type="url" id="img_url" name="img_url" required>
+            </div>
+
+            <div class="form-group">
+                <label for="theme_id">Theme:</label>
+                <select id="theme_id" name="theme_id" required>
+                    <% themes.forEach(theme => { %>
+                        <option value="<%= theme.id %>">
+                            <%= theme.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="set_num">Set Number:</label>
+                <input type="text" id="set_num" name="set_num" required>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
