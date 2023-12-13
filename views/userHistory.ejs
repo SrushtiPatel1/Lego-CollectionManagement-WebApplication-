@@ -7,16 +7,18 @@
     <title>User History</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             background-image: url('https://i.pinimg.com/originals/08/96/51/0896511df173f914d1ee6bd45bcfac82.jpg');
             background-repeat: repeat;
+            background-size: cover;
+            color: #333;
         }
 
         .navbar {
-            background-color: #a300d9;
+            background-color: #4CAF50;
             color: #fff;
             display: flex;
             justify-content: space-between;
@@ -33,6 +35,7 @@
         .navbar a:hover {
             text-decoration: underline;
         }
+         
         .navbar ul {
             display: flex;
             list-style: none;
@@ -47,81 +50,92 @@
         .navbar ul li:last-child {
             margin-right: 0;
         }
+
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #e5e9ea;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
         }
 
         .hero {
-            background-color: #9fec25;
+            background-color: #0074d9;
             color: #fff;
             padding: 20px;
             text-align: center;
             margin-bottom: 20px;
+            border-radius: 10px;
         }
-
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
-        th, td {
-            padding: 10px;
+        th,
+        td {
+            padding: 15px;
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
 
         th {
-            background-color: #0074d9;
+            background-color: #4CAF50;
             color: #fff;
         }
 
         .btn {
-            background-color: #fff;
-            color: #0074d9;
+            background-color: #4CAF50;
+            color: #fff;
             text-decoration: none;
             padding: 10px 20px;
             border-radius: 5px;
             display: inline-block;
             margin-top: 10px;
+            transition: background-color 0.3s ease;
         }
 
         .btn:hover {
-            background-color: #eee;
+            background-color: #45a049;
         }
     </style>
 </head>
-<%- include('partials/navbar', {page: '/'}) %>
-<body>
-  <div class="container">
-    <div class="hero">
-        <h1>User History</h1>
-        <p>Welcome back, <%= session.user.userName %>!</p>
-    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Login Date/Time</th>
-                <th>Client Information</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% session.user.loginHistory.forEach(entry => { %>
+<body>
+    <%- include('partials/navbar', {page: '/'}) %>
+
+    <div class="container">
+        <div class="hero">
+            <h1>User's Visit History</h1>
+            <p>Welcome back, <%= session.user.userName %>!</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date and Time</th>
+                    <th>Past Login Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% session.user.loginHistory.forEach(entry => { %>
                 <tr>
                     <td><%= entry.dateTime %></td>
                     <td><%= entry.userAgent %></td>
                 </tr>
-            <% }); %>
-        </tbody>
-    </table>
-</div>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <a href="#" class="btn">View More</a>
+    </div>
 </body>
 
 </html>
