@@ -31,7 +31,20 @@
         .navbar a:hover {
             text-decoration: underline;
         }
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
+        .navbar ul li {
+            margin-right: 15px;
+        }
+
+        .navbar ul li:last-child {
+            margin-right: 0;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -179,14 +192,10 @@
     <title>Lego Collection</title>
 </head>
 <body>
-    <div class="navbar">
-        <a href="/">Lego Collection</a>
-        <a href="/about">About</a>
-        <div class="dropdown">
-            <!-- Edit Link -->
-            <a href="/lego/editSet/<%= set.set_num %>" class="btn btn-success">Edit</a>
-        </div>
-    </div>
+    <%- include('partials/navbar', {page: '/'}) %>
+        
+           
+        
     <div class="container">
         <div class="hero">
             <h1><%= set.name %></h1>
@@ -202,6 +211,7 @@
         <div class="quote" id="quote">
         </div>
         <a href="#" onclick="history.back(); return false;" class="btn">Back</a>
+         <% if(session.user){ %> <a href="/lego/editSet/<%= set.set_num %>" class="btn btn-success">Edit</a> <% } %>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {

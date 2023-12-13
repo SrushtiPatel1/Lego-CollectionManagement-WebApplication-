@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          margin: 0;
+          padding: 0;
+          background-image: url('https://i.pinimg.com/originals/08/96/51/0896511df173f914d1ee6bd45bcfac82.jpg');
+          background-repeat: repeat;
+      }
+
+      .navbar {
+          background-color: #a300d9;
+          color: #fff;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 20px;
+      }
+
+      .navbar a {
+          color: #fff;
+          text-decoration: none;
+          margin: 0 10px;
+      }
+
+      .navbar a:hover {
+          text-decoration: underline;
+      }
+      .navbar ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin-right: 15px;
+        }
+
+        .navbar ul li:last-child {
+            margin-right: 0;
+        }
+      .container {
+          max-width: 600px;
+          margin: 20px auto;
+          padding: 20px;
+          background-color: #11bae4;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero {
+          background-color: #9fec25;
+          color: #fff;
+          padding: 20px;
+          text-align: center;
+          margin-bottom: 20px;
+      }
+
+      form {
+          display: grid;
+          gap: 10px;
+      }
+
+      .form-group {
+          display: grid;
+          gap: 5px;
+          grid-template-columns: 1fr 1fr;
+      }
+
+      label {
+          font-weight: bold;
+          margin-bottom: 5px;
+          grid-column: 1 / span 2;
+      }
+
+      input,
+      select,
+      button {
+          width: calc(100% - 10px);
+          padding: 10px;
+          box-sizing: border-box;
+          margin-top: 5px;
+          grid-column: span 2;
+      }
+
+      button {
+          background-color: #fff;
+          color: #0074d9;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      button:hover {
+          background-color: #eee;
+      }
+  </style>
+</head>
+<%- include('partials/navbar', {page: '/'}) %>
+<body>
+    <div class="container">
+        <% if (!successMessage) { %>
+            <div class="hero">
+                <h1>Register</h1>
+            </div>
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <label for="userName">User Name:</label>
+                    <input type="text" id="userName" name="userName" placeholder="User Name" required value="<%= userName ? userName : '' %>">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="password2">Confirm Password:</label>
+                    <input type="password" id="password2" name="password2" placeholder="Confirm Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <% if (errorMessage) { %>
+                <div class="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span><%= errorMessage %></span>
+                </div>
+            <% } %>
+        <% } else { %>
+            <div class="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span><%= successMessage %></span>
+            </div>
+            <br />
+            <a href="/login" class="btn">Proceed to Log in</a>
+        <% } %>
+    </div>
+</body>
+
+</html>

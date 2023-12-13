@@ -1,17 +1,18 @@
 /********************************************************************************
- * WEB322 – Assignment 05
+ * WEB322 – Assignment 06
  * I declare that this assignment is my own work in accordance with Seneca's
  * Academic Integrity Policy:
  * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
  *
- * Name: Srushti Patel Student ID: 117791228 Date: 27/11/2023
+ * Name: Srushti Patel Student ID: 117791228 Date: 13/12/2023
  *
  * Published URL: https://successful-teal-fashion.cyclic.app/lego/sets
  ********************************************************************************/
 
-
 const express = require('express');
 const legoData = require('./modules/legoSets');
+const authData = require('./modules/auth-service');
+const clientSessions = require('client-sessions');
 const path = require('path');
 
 const app = express();
@@ -25,10 +26,37 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Initialize LEGO data and start the server
+// Configure client-sessions middleware
+app.use(
+  clientSessions({
+    cookieName: 'session',
+    secret: 'o6LjQ5EVNC28ZgK64hDELM18ScpFQr',
+    duration: 24 * 60 * 1000,
+    activeDuration: 1000 * 60,
+  })
+);
+
+// Custom middleware to provide session data to templates
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
+
+// Ensure login middleware
+function ensureLogin(req, res, next) {
+  if (!req.session || !req.session.user) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+}
+
+// Initialize LEGO data and authentication data, then start the server
 async function startServer() {
   try {
     await legoData.initialize();
+    await authData.initialize();
+
     app.listen(PORT, () => {
       console.log(`Server started on http://localhost:${PORT}`);
     });
@@ -39,7 +67,6 @@ async function startServer() {
 
 startServer();
 
-// Routes
 
 // Home route
 app.get('/', (req, res) => {
@@ -58,19 +85,70 @@ app.get('/lego/sets', handleSetsRoute);
 app.get('/lego/sets/:set_num', handleSetDetailsRoute);
 
 // Route to render the form for adding a new set
-app.get('/lego/addSet', handleAddSetFormRoute);
+app.get('/lego/addSet', ensureLogin, handleAddSetFormRoute);
 
 // Route to handle form submission for adding a new set
-app.post('/lego/addSet', handleAddSetSubmissionRoute);
+app.post('/lego/addSet', ensureLogin, handleAddSetSubmissionRoute);
 
 // Route to render the form for editing an existing set
-app.get('/lego/editSet/:num', handleEditSetFormRoute);
+app.get('/lego/editSet/:num', ensureLogin, handleEditSetFormRoute);
 
 // Route to handle form submission for editing an existing set
-app.post('/lego/editSet', handleEditSetSubmissionRoute);
+app.post('/lego/editSet', ensureLogin, handleEditSetSubmissionRoute);
 
 // Route for deleting a LEGO set
-app.get('/lego/deleteSet/:num', handleDeleteSetRoute);
+app.get('/lego/deleteSet/:num', ensureLogin, handleDeleteSetRoute);
+
+// Route to render the login form
+app.get('/login', (req, res) => {
+  res.render('login', { errorMessage: null, userName: '' });
+});
+
+// Route to render the register form  
+app.get('/register', (req, res) => {
+  res.render('register', { successMessage: null, errorMessage: null, userName: '' });
+});
+
+// Route to handle registration form submission
+app.post('/register', async(req, res) => {
+   try{ const userData = req.body;
+  
+    await authData.registerUser(userData);
+     res.render('register', { successMessage: 'User created'});
+   }catch(err) {
+    res.render('register', { successMessage: null, errorMessage: err, userName: req.body.userName });
+   }
+});
+
+// Route to handle login form submission
+app.post('/login', async (req, res) => {
+  try{
+    req.body.userAgent = req.get('User-Agent');
+    const user = await authData.checkUser(req.body);
+  
+      req.session.user = {
+        userName: user.userName,
+        email: user.email,
+        loginHistory: user.loginHistory,
+      };
+
+      res.redirect('/lego/sets');
+  }
+    catch(err) { res.render('login', { errorMessage: err, userName: req.body.userName });
+}
+});
+
+// Route to handle logout
+app.get('/logout', (req, res) => {
+  req.session.user = null;
+  res.redirect('/');
+
+});
+// Route to render the user history view
+app.get('/userHistory', ensureLogin, (req, res) => {
+  res.render('userHistory');
+});
+
 
 // Error handling middleware
 app.use(handleError);
@@ -160,14 +238,15 @@ function handleEditSetSubmissionRoute(req, res) {
 }
 
 function handleDeleteSetRoute(req, res) {
-    const setNum = req.params.num;
-  
-    legoData.deleteSet(setNum)
-      .then(() => res.redirect('/lego/sets'))
-      .catch((error) => res.render("500", { message: `I'm sorry, but we have encountered the following error: ${error}` }));
-  }
+  const setNum = req.params.num;
 
-  
+  legoData
+    .deleteSet(setNum)
+    .then(() => res.redirect('/lego/sets'))
+    .catch((error) =>
+      res.render('500', { message: `I'm sorry, but we have encountered the following error: ${error}` })
+    );
+}
 
 async function editSet(setNum, setData) {
   try {

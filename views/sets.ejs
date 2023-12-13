@@ -30,7 +30,20 @@
         .navbar a:hover {
             text-decoration: underline;
         }
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
+        .navbar ul li {
+            margin-right: 15px;
+        }
+
+        .navbar ul li:last-child {
+            margin-right: 0;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -157,14 +170,7 @@
 </head>
 <body>
     
-    <div class="navbar">
-        <a href="/">Lego Collection</a>
-        <a href="/about">About</a>
-        <div class="dropdown">
-            
-            </div>
-        </div>
-    </div>
+    <%- include('partials/navbar', {page: '/'}) %>
         
         <div class="container">
             <div class="hero">

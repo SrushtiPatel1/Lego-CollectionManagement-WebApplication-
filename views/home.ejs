@@ -20,6 +20,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
+            
         }
         .navbar a {
             color: #fff;
@@ -28,6 +29,20 @@
         }
         .navbar a:hover {
             text-decoration: underline;
+        }
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin-right: 15px;
+        }
+
+        .navbar ul li:last-child {
+            margin-right: 0;
         }
         .container {
             max-width: 1200px;
@@ -96,14 +111,7 @@
     <title>Lego Collection</title>
 </head>
 <body>
-    <div class="navbar bg-base-100">
-        <a href="/" class="<%= (page === '/') ? 'active' : '' %>">Lego Collection</a>
-        <ul>
-        <li><a class="<%= (page === '/lego/sets') ? 'active' : '' %>" href="/lego/sets">View Collection</a></li>
-        </ul>
-        <li><a class="<%= (page === '/lego/addSet') ? 'active' : '' %>" href="/lego/addSet">Add to Collection</a></li>
-        <a href="/about" class="<%= (page === '/about') ? 'active' : '' %>">About</a>
-    </div>
+    <%- include('partials/navbar', {page: '/'}) %>
     
     <div class="container">
         <div class="hero">
